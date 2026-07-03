@@ -1,4 +1,4 @@
-import { createPublicClient } from "@/lib/supabase/public";
+import { getPublishedPage, listPublishedSlugs } from "@/lib/backend-api";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
  
@@ -9,40 +9,11 @@ export const dynamicParams = true;
 // tune this down if you need near-instant edits to reflect.
 export const revalidate = 3600;
  
-interface SeoPage {
-  slug: string;
-  meta_title: string;
-  meta_description: string;
-  meta_keywords: string | null;
-  og_title: string | null;
-  og_description: string | null;
-  og_image_url: string | null;
-  html_content: string;
-  css_content: string;
-  js_content: string;
-  json_ld: Record<string, unknown>;
-  status: string;
-}
- 
-async function getPage(slug: string): Promise<SeoPage | null> {
-  const supabase = createPublicClient();
-  const { data, error } = await supabase
-    .from("seo_pages")
-    .select("*")
-    .eq("slug", slug)
-    .eq("status", "published")
-    .single();
- 
-  if (error || !data) return null;
-  return data as SeoPage;
-}
- 
 // Pre-build every currently-published slug at deploy time (SSG).
 // Anything published after deploy falls through to on-demand SSR above.
 export async function generateStaticParams() {
-  const supabase = createPublicClient();
-  const { data } = await supabase.from("seo_pages").select("slug").eq("status", "published");
-  return (data || []).map((row) => ({ slug: row.slug }));
+  const pages = await listPublishedSlugs();
+  return pages.map((row) => ({ slug: row.slug }));
 }
  
 export async function generateMetadata({
@@ -51,7 +22,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const page = await getPage(slug);
+  const page = await getPublishedPage(slug);
   if (!page) return {};
  
   return {
@@ -75,7 +46,7 @@ export default async function SeoPageRoute({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const page = await getPage(slug);
+  const page = await getPublishedPage(slug);
  
   if (!page) notFound();
  

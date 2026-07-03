@@ -55,6 +55,24 @@ function runNpmScript(script) {
   });
 }
 
+function backendHealth() {
+  return new Promise((resolve) => {
+    const request = globalThis.fetch("http://127.0.0.1:8000/health")
+      .then(async (response) => ({
+        ok: response.ok,
+        status: response.status,
+        body: await response.text(),
+      }))
+      .catch((error) => ({
+        ok: false,
+        status: 0,
+        body: error.message,
+      }));
+
+    resolve(request);
+  });
+}
+
 async function listRoutes(dir = "app", prefix = "") {
   const absolute = projectPath(dir);
   const entries = await readdir(absolute, { withFileTypes: true });
@@ -182,7 +200,7 @@ server.registerTool(
     title: "Run Project Check",
     description: "Run a safe npm project check script.",
     inputSchema: {
-      script: z.enum(["lint", "build"]).describe("The npm script to run."),
+      script: z.enum(["lint", "build", "check:backend"]).describe("The npm script to run."),
     },
   },
   async ({ script }) => {
@@ -196,6 +214,23 @@ server.registerTool(
       ],
     };
   }
+);
+
+server.registerTool(
+  "check_backend_health",
+  {
+    title: "Check Backend Health",
+    description: "Call the local FastAPI /health endpoint on port 8000.",
+    inputSchema: {},
+  },
+  async () => ({
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(await backendHealth(), null, 2),
+      },
+    ],
+  })
 );
 
 const transport = new StdioServerTransport();

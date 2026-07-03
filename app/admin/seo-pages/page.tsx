@@ -1,12 +1,19 @@
-import { createClient } from "@/lib/supabase/server";
+import { getAdminAccessToken, listAdminPages, type SeoPageSummary } from "@/lib/backend-api";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function SeoPagesList() {
-  const supabase = await createClient();
-  const { data: pages, error } = await supabase
-    .from("seo_pages")
-    .select("id, slug, meta_title, status, quality_passed, updated_at")
-    .order("updated_at", { ascending: false });
+  const token = await getAdminAccessToken();
+  if (!token) redirect("/admin/login");
+
+  let pages: SeoPageSummary[] = [];
+  let error: Error | null = null;
+
+  try {
+    pages = await listAdminPages(token);
+  } catch (caught) {
+    error = caught instanceof Error ? caught : new Error("Backend API is unavailable.");
+  }
 
   const pageCount = pages?.length || 0;
 
@@ -95,10 +102,11 @@ export default async function SeoPagesList() {
           <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-amber-950">
             <p className="font-black">Database setup required</p>
             <p className="mt-2 text-sm leading-6">
-              Supabase is connected, but the{" "}
+              The FastAPI backend is connected to Supabase, but the{" "}
               <code className="rounded bg-white px-1">seo_pages</code> table was not found.
-              Run <code className="rounded bg-white px-1">schema.sql</code> in the
-              Supabase SQL Editor, then refresh this dashboard.
+              Run <code className="rounded bg-white px-1">schema.sql</code> in Supabase, start
+              the backend with <code className="rounded bg-white px-1">npm run dev:backend</code>,
+              then refresh this dashboard.
             </p>
           </div>
         )}
@@ -153,7 +161,7 @@ export default async function SeoPagesList() {
                   <h3 className="text-xl font-black text-[#061d22]">{page.meta_title}</h3>
                   <p className="mt-2 font-mono text-sm text-[#567078]">/{page.slug}</p>
                   <p className="mt-3 text-sm font-semibold text-[#6b8289]">
-                    Updated {new Date(page.updated_at).toLocaleDateString()}
+                  Updated {page.updated_at ? new Date(page.updated_at).toLocaleDateString() : "not yet"}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">

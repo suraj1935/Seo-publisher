@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 4000",
+    "dev:backend": "python -m uvicorn backend.app.main:app --reload --port 8000",
+    "check:backend": "python -m compileall backend",
     "build": "next build",
     "start": "next start -p 4000",
     "lint": "eslint",

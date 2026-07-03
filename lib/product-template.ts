@@ -1,13 +1,13 @@
 export const productDisplayTemplate = {
   slug: "sunsky-digital-solutions",
-  meta_title: "Sun Sky | AI, Labs, Technologies and Digital Products",
+  meta_title: "Sun Sky | Web, App, SEO & AI Automation",
   meta_description:
-    "Sun Sky builds intelligent AI, cloud, automation, and digital product solutions that help businesses grow, scale, and lead.",
+    "Sun Sky designs and builds websites, mobile apps, SEO systems, and AI agent automation that help businesses launch faster and grow smarter.",
   meta_keywords:
-    "Sun Sky, AI solutions, digital products, cloud data engineering, automation, technologies",
-  og_title: "Sun Sky | Intelligent Digital Solutions",
+    "Sun Sky, web development, app development, SEO, AI agents, automation, digital agency",
+  og_title: "Sun Sky | Web, App, SEO & AI Automation",
   og_description:
-    "AI-powered platforms, cloud solutions, automation, and digital product development for future-ready businesses.",
+    "Websites, mobile apps, SEO systems, and AI agent automation built to help your business launch faster and grow smarter.",
   og_image_url: "",
   html_content: `<main class="sunsky-page">
   <header class="sunsky-header">
@@ -19,15 +19,12 @@ export const productDisplayTemplate = {
       <a href="#about">About Us</a>
       <a href="#services">Services</a>
       <a href="#solutions">Solutions</a>
-      <a href="#labs">Labs</a>
-      <a href="#technologies">Technologies</a>
-      <a href="#careers">Careers</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="sunsky-actions">
       <button class="theme-toggle" type="button" aria-label="Theme controls">
-        <span>☼</span>
-        <span>◐</span>
+        <span>&#9728;</span>
+        <span>&#9680;</span>
       </button>
       <a class="signin-button" href="/admin/login">Sign In</a>
     </div>
@@ -35,23 +32,24 @@ export const productDisplayTemplate = {
 
   <section id="home" class="hero-section">
     <div class="hero-copy">
-      <h1>Innovate Today.<br />Transform <span>Tomorrow.</span></h1>
+      <h1>Websites, Apps & AI.<br />Built to <span>Grow With You.</span></h1>
       <p>
-        Sun Sky builds intelligent solutions using AI, advanced technologies,
-        and digital innovation to help businesses grow, scale, and lead in the future.
+        Sun Sky is a web development, app development, SEO, and AI automation
+        studio. We design, build, and ship products that help businesses
+        launch faster and run smarter.
       </p>
       <div class="hero-buttons">
-        <a class="explore-button" href="#services">Explore Solutions <b>→</b></a>
-        <a class="learn-button" href="#about">Learn More <b>▷</b></a>
+        <a class="explore-button" href="#services">Explore Solutions <b>&#8594;</b></a>
+        <a class="learn-button" href="#about">Learn More <b>&#9655;</b></a>
       </div>
       <div class="trusted">
-        <p>Trusted by innovative companies</p>
-        <div class="trusted-logos" aria-label="Trusted companies">
-          <strong>Deloitte.</strong>
-          <strong>Microsoft</strong>
-          <strong>aws</strong>
-          <strong>Google Cloud</strong>
-          <strong>IBM</strong>
+        <p>Built on a modern, reliable stack</p>
+        <div class="trusted-logos" aria-label="Technologies we build with">
+          <strong>Next.js</strong>
+          <strong>React</strong>
+          <strong>Supabase</strong>
+          <strong>FastAPI</strong>
+          <strong>Vercel</strong>
         </div>
       </div>
     </div>
@@ -63,28 +61,28 @@ export const productDisplayTemplate = {
 
   <section id="about" class="feature-strip" aria-label="Core strengths">
     <article>
-      <span class="feature-icon orange">↗</span>
+      <span class="feature-icon orange">&#8599;</span>
       <div>
         <h2>Future Ready</h2>
         <p>We build scalable solutions for tomorrow's challenges.</p>
       </div>
     </article>
     <article>
-      <span class="feature-icon blue">◇</span>
+      <span class="feature-icon blue">&#9671;</span>
       <div>
         <h2>Secure & Reliable</h2>
         <p>Enterprise-grade security and robust architectures.</p>
       </div>
     </article>
     <article>
-      <span class="feature-icon violet">⌬</span>
+      <span class="feature-icon violet">&#9004;</span>
       <div>
         <h2>AI Powered</h2>
         <p>Intelligent systems that learn, adapt and deliver value.</p>
       </div>
     </article>
     <article>
-      <span class="feature-icon teal">▥</span>
+      <span class="feature-icon teal">&#9637;</span>
       <div>
         <h2>Data Driven</h2>
         <p>Turning data into insights that drive real growth.</p>
@@ -100,33 +98,33 @@ export const productDisplayTemplate = {
         From AI-powered platforms to cloud solutions, we help businesses innovate
         and transform with confidence.
       </p>
-      <a href="#solutions">View All Services <b>→</b></a>
+      <a href="#solutions">View All Services <b>&#8594;</b></a>
     </div>
 
     <div class="service-grid">
       <article>
-        <span class="card-icon orange">☼</span>
+        <span class="card-icon orange">&#9728;</span>
         <h3>AI & Machine Learning</h3>
         <p>Intelligent solutions that learn, predict, and optimize business outcomes.</p>
-        <a href="#contact" aria-label="AI and machine learning">→</a>
+        <a href="#contact" aria-label="AI and machine learning">&#8594;</a>
       </article>
       <article>
-        <span class="card-icon blue">☁</span>
+        <span class="card-icon blue">&#9729;</span>
         <h3>Cloud & Data Engineering</h3>
         <p>Scalable cloud platforms and data pipelines built for performance.</p>
-        <a href="#contact" aria-label="Cloud and data engineering">→</a>
+        <a href="#contact" aria-label="Cloud and data engineering">&#8594;</a>
       </article>
       <article>
-        <span class="card-icon violet">▣</span>
+        <span class="card-icon violet">&#9635;</span>
         <h3>Digital Product Development</h3>
         <p>End-to-end product development that brings ideas to life.</p>
-        <a href="#contact" aria-label="Digital product development">→</a>
+        <a href="#contact" aria-label="Digital product development">&#8594;</a>
       </article>
       <article>
-        <span class="card-icon teal">⚙</span>
+        <span class="card-icon teal">&#9881;</span>
         <h3>Automation Solutions</h3>
         <p>Streamline operations and boost efficiency with smart automation.</p>
-        <a href="#contact" aria-label="Automation solutions">→</a>
+        <a href="#contact" aria-label="Automation solutions">&#8594;</a>
       </article>
     </div>
   </section>
@@ -138,10 +136,10 @@ export const productDisplayTemplate = {
       <span></span>
     </div>
     <div class="impact-metrics">
-      <article><span>♙</span><strong>250+</strong><p>Happy Clients</p></article>
-      <article><span>↗</span><strong>500+</strong><p>Projects Delivered</p></article>
-      <article><span>◎</span><strong>25+</strong><p>Countries Served</p></article>
-      <article><span>♕</span><strong>10+</strong><p>Industry Awards</p></article>
+      <article><span>&#9817;</span><strong>250+</strong><p>Happy Clients</p></article>
+      <article><span>&#8599;</span><strong>500+</strong><p>Projects Delivered</p></article>
+      <article><span>&#9678;</span><strong>25+</strong><p>Countries Served</p></article>
+      <article><span>&#9813;</span><strong>10+</strong><p>Industry Awards</p></article>
     </div>
   </section>
 </main>`,
@@ -724,7 +722,7 @@ a {
     "@type": "Organization",
     name: "Sun Sky",
     description:
-      "Sun Sky builds intelligent AI, cloud, automation, and digital product solutions.",
+      "Sun Sky designs and builds websites, mobile apps, SEO systems, and AI agent automation.",
     url: "https://sunsky.example",
   },
 };
