@@ -2,6 +2,7 @@
  
 import { useState, useMemo } from "react";
 import { savePage } from "@/lib/actions";
+import { productDisplayTemplate } from "@/lib/product-template";
  
 export interface PageEditorProps {
   initial?: {
@@ -28,25 +29,39 @@ export default function PageEditor({ initial = {} }: PageEditorProps) {
   const [issues, setIssues] = useState<{ field: string; message: string; severity: string }[]>([]);
  
   const [form, setForm] = useState({
-    slug: initial.slug || "",
-    meta_title: initial.meta_title || "",
-    meta_description: initial.meta_description || "",
-    meta_keywords: initial.meta_keywords || "",
-    og_title: initial.og_title || "",
-    og_description: initial.og_description || "",
+    slug: initial.slug || productDisplayTemplate.slug,
+    meta_title: initial.meta_title || productDisplayTemplate.meta_title,
+    meta_description: initial.meta_description || productDisplayTemplate.meta_description,
+    meta_keywords: initial.meta_keywords || productDisplayTemplate.meta_keywords,
+    og_title: initial.og_title || productDisplayTemplate.og_title,
+    og_description: initial.og_description || productDisplayTemplate.og_description,
     og_image_url: initial.og_image_url || "",
-    html_content: initial.html_content || "<h1>Your heading here</h1>\n<p>Your content...</p>",
-    css_content: initial.css_content || "",
-    js_content: initial.js_content || "",
-    json_ld: initial.json_ld ? JSON.stringify(initial.json_ld, null, 2) : `{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": ""
-}`,
+    html_content: initial.html_content || productDisplayTemplate.html_content,
+    css_content: initial.css_content || productDisplayTemplate.css_content,
+    js_content: initial.js_content || productDisplayTemplate.js_content,
+    json_ld: initial.json_ld
+      ? JSON.stringify(initial.json_ld, null, 2)
+      : JSON.stringify(productDisplayTemplate.json_ld, null, 2),
   });
  
   function update<K extends keyof typeof form>(key: K, value: string) {
     setForm((f) => ({ ...f, [key]: value }));
+  }
+
+  function loadProductDisplayTemplate() {
+    setForm({
+      slug: productDisplayTemplate.slug,
+      meta_title: productDisplayTemplate.meta_title,
+      meta_description: productDisplayTemplate.meta_description,
+      meta_keywords: productDisplayTemplate.meta_keywords,
+      og_title: productDisplayTemplate.og_title,
+      og_description: productDisplayTemplate.og_description,
+      og_image_url: productDisplayTemplate.og_image_url,
+      html_content: productDisplayTemplate.html_content,
+      css_content: productDisplayTemplate.css_content,
+      js_content: productDisplayTemplate.js_content,
+      json_ld: JSON.stringify(productDisplayTemplate.json_ld, null, 2),
+    });
   }
  
   const previewSrcDoc = useMemo(() => {
@@ -99,8 +114,24 @@ export default function PageEditor({ initial = {} }: PageEditorProps) {
   ];
  
   return (
-    <div className="mx-auto max-w-5xl p-8">
-      <h1 className="mb-4 text-2xl font-semibold text-black">{initial.id ? "Edit Page" : "New Page"}</h1>
+    <div className="mx-auto max-w-6xl p-6 sm:p-8">
+      <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">
+            Product publisher
+          </p>
+          <h1 className="mt-1 text-2xl font-semibold text-black">
+            {initial.id ? "Edit Product Display Page" : "New Product Display Page"}
+          </h1>
+        </div>
+        <button
+          type="button"
+          onClick={loadProductDisplayTemplate}
+          className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-800 transition hover:bg-emerald-100"
+        >
+          Load product display template
+        </button>
+      </div>
  
       {issues.length > 0 && (
         <div className="mb-4 rounded border border-red-200 bg-red-50 p-4">

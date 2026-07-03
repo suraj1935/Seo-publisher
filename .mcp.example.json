@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "seo-publisher": {
+      "command": "node",
+      "args": [
+        "C:/Users/sg200/Desktop/SunSky/seo-publisher/mcp/server.mjs"
+      ]
+    }
+  }
+}

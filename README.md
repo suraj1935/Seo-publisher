@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SEO Publisher
 
-## Getting Started
+Next.js publisher for creating and managing Sun Sky product/SEO pages with Supabase.
 
-First, run the development server:
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Admin login: `http://localhost:4000/admin/login`
+- Product display preview: `http://localhost:4000/product-display`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Supabase Setup
 
-## Learn More
+1. Copy `.env.example` to `.env.local`.
+2. Fill in the Supabase URL, anon key, and service role key.
+3. Run `schema.sql` in the Supabase SQL Editor.
 
-To learn more about Next.js, take a look at the following resources:
+Do not commit `.env.local`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## MCP Server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project includes a local stdio MCP server for safe project inspection and checks.
 
-## Deploy on Vercel
+Start it manually:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run mcp
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Example client configuration:
+
+```json
+{
+  "mcpServers": {
+    "seo-publisher": {
+      "command": "node",
+      "args": [
+        "C:/Users/sg200/Desktop/SunSky/seo-publisher/mcp/server.mjs"
+      ]
+    }
+  }
+}
+```
+
+A ready-to-copy example is also available in `.mcp.example.json`.
+
+Available MCP tools:
+
+- `list_routes`: Lists app routes.
+- `read_product_template`: Reads the current Sun Sky product template.
+- `run_project_check`: Runs `npm run lint` or `npm run build`.
+
+Available MCP resources:
+
+- `seo-publisher://product-template`
+- `seo-publisher://routes`
+- `seo-publisher://file/{filePath}`
+
+The server blocks `.env` files so local secrets are not exposed through MCP.
